@@ -31,7 +31,7 @@ To use an ENVIRONMENT VARIABLE you need to add the variables to your Codefresh P
 Example `codefresh.yml` build is below with required ENVIRONMENT VARIABLES in place.
 
 | ENVIRONMENT VARIABLE | DEFAULT | TYPE | REQUIRED | DESCRIPTION |
-|----------------------------|--------------------------------------|----------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------|----------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------|
 | CODEFRESH_CLI_KEY | null | string | Yes | https://g.codefresh.io/account/tokens |
 | CONSOLE_HOSTNAME | null | string | Yes | hostname/ip |
 | CONSOLE_PORT | null | string | Yes | port |
