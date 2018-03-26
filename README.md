@@ -15,7 +15,7 @@ Twistlock CLI: https://twistlock.desk.com/customer/en/portal/articles/2879128-sc
 ## Local Usage
 
 ``` sh
-docker run --entrypoint /usr/local/bin/twistcli --volume /var/run/docker.sock:/var/run/docker.sock sctechtech/docker-twistcli:latest images scan docker-twistcli:latest --address http://35.203.149.15:8081 --user codefresh-admin --password DimensionC137 --include-files --include-package-files --details
+docker run --volume /var/run/docker.sock:/var/run/docker.sock sctechtech/docker-twistcli:latest twistcli images scan <Docker Image Name or ID> --address <Twistlock Console Address> --user <Twistlock Console User> --password '<Twistlock Console Password>' --include-files --include-package-files --details
 ```
 
 ## Script Library
@@ -32,6 +32,7 @@ Example `codefresh.yml` build is below with required ENVIRONMENT VARIABLES in pl
 
 | ENVIRONMENT VARIABLE | DEFAULT | TYPE | REQUIRED | DESCRIPTION |
 |----------------------------|--------------------------------------|----------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------|
+| CODEFRESH_CLI_KEY | null | string | Yes | https://g.codefresh.io/account/tokens |
 | CONSOLE_HOSTNAME | null | string | Yes | hostname/ip |
 | CONSOLE_PORT | null | string | Yes | port |
 | CONSOLE_USERNAME | null | string | Yes | username |
