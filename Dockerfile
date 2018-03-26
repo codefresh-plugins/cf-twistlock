@@ -8,7 +8,7 @@ RUN apk update && \
     apk add docker nodejs git && \
     pip install requests && \
     npm install codefresh -g && \
-    chmod +x /usr/local/bin/twistcli 
+    chmod +x /usr/local/bin/twistcli
 
 COPY script/twistlock-cli.py /twistlock-cli.py
 
