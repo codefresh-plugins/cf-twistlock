@@ -24,7 +24,24 @@ docker run --volume /var/run/docker.sock:/var/run/docker.sock sctechtech/docker-
 
 Executes TwistCLI to scan Docker image given.
 
-### options
+### TLS is partially supported for uploading contents to your Twist Console but certification is skipped when downloading the Report URL from the server which takes place later.
+
+Extracting Cert:
+
+``` sh
+openssl s_client -connect <URL>:<PORT>
+```
+
+Copy out the lines beginning with and including `-----BEGIN CERTIFICATE-----` up to and including `-----END CERTIFICATE-----`
+
+You can past that into a Codefresh variable `TLSCACERT` without reformatting.
+Script will take care of that.
+
+The add the entry below to your `environment:` array in the `TwistlockScanImage`
+
+`- VULNERABILITY_THRESHOLD=${{VULNERABILITY_THRESHOLD}}`
+
+### Full List of Options
 
 To use an ENVIRONMENT VARIABLE you need to add the variables to your Codefresh Pipeline and also to your codefresh.yaml.
 
@@ -37,8 +54,7 @@ Example `codefresh.yml` build is below with required ENVIRONMENT VARIABLES in pl
 | CONSOLE_PORT | null | string | Yes | port |
 | CONSOLE_USERNAME | null | string | Yes | username |
 | CONSOLE_PASSWORD | null | string | Yes | password |
-| TLS_ENABLED | null | boolean | No | enable TLS |
-| TLSCACERT | null | string | No | CA Cert |
+| TLSCACERT | null | string | No | CA Cert if provided TLS will be used |
 | HASH | [ sha1 ] | string | No | [ md5, sha1, sha256 ] hashing algorithm |
 | DETAILS | null | boolean | No | prints an itemized list of each vulnerability found by the scanner |
 | INCLUDE_PACKAGE_FILES | null | boolean | No | List all packages in the image. |

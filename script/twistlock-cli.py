@@ -37,7 +37,6 @@ def main(docker_command):
     console_port = os.getenv('CONSOLE_PORT')
     console_username = os.getenv('CONSOLE_USERNAME')
     console_password = os.getenv('CONSOLE_PASSWORD')
-    tls_enabled = os.getenv('TLS_ENABLED')
     tlscacert = os.getenv('TLSCACERT')
     hash = os.getenv('HASH', 'sha1')
     include_package_files = os.getenv('INCLUDE_PACKAGE_FILES')
@@ -51,7 +50,7 @@ def main(docker_command):
     docker_image_id = out.decode("utf-8").strip('\n')
 
     # Determine Protocol
-    console_protocol = 'https' if tls_enabled else 'http'
+    console_protocol = 'https' if tlscacert else 'http'
 
     # Base twistcli commnad to scan images
     twistcli_base_command = 'twistcli images scan'
@@ -74,12 +73,19 @@ def main(docker_command):
         options.append("--details")
     if only_fixed:
         options.append("--only-fixed")
-    if tls_enabled:
+    if tlscacert:
         # Download and store Twistlock Console site cert
-        with open('console.cer', 'a') as f:
-            f.write(tlscacert)
+        cacertfile = 'console.cer'
+        stripbegin = tlscacert.replace('-----BEGIN CERTIFICATE----- ', '')
+        base64 = stripbegin.replace(' -----END CERTIFICATE-----', '')
+        with open(cacertfile, 'a') as f:
+            f.write('-----BEGIN CERTIFICATE-----\n')
+            f.write(base64.replace(' ', '\n'))
+            f.write('\n-----END CERTIFICATE-----')
             f.close()
-        options.append("--tlscacert '{}'".format(os.path.join(dir, 'console.cer')))
+        with open(cacertfile, 'r') as fin:
+            print(fin.read())
+        options.append("--tlscacert {}".format(cacertfile))
     if compliance_threshold:
         options.append("--compliance-threshold '{}'".format(compliance_threshold))
     if vulnerability_threshold:
@@ -99,9 +105,7 @@ def main(docker_command):
     print('Twistlock Report: ' + report_url)
 
     # Download Report
-    url = report_url
-    user, password = console_username, console_password
-    resp = requests.get(url, auth=(user, password))
+    resp = requests.get(report_url, auth=(console_username, console_password), verify=False)
     with open('twistlock_report.tar.gz', 'wb') as f:
         f.write(resp.content)
         f.close()
