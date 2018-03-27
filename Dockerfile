@@ -12,7 +12,11 @@ RUN apk update && \
         nodejs && \
     pip install requests && \
     npm install codefresh -g && \
-    chmod +x /usr/local/bin/twistcli
+    chmod +x /usr/local/bin/twistcli&& \
+    addgroup -g 1000 -S twistlock && \
+    adduser -u 1000 -S twistlock -G twistlock
+
+USER twistlock
 
 COPY script/twistlock-cli.py /twistlock-cli.py
 
