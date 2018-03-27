@@ -37,8 +37,7 @@ Example `codefresh.yml` build is below with required ENVIRONMENT VARIABLES in pl
 | CONSOLE_PORT | null | string | Yes | port |
 | CONSOLE_USERNAME | null | string | Yes | username |
 | CONSOLE_PASSWORD | null | string | Yes | password |
-| TLS_ENABLED | null | boolean | No | enable TLS |
-| TLSCACERT | null | string | No | CA Cert |
+| TLSCACERT | null | string | No | CA Cert if provided TLS will be used |
 | HASH | [ sha1 ] | string | No | [ md5, sha1, sha256 ] hashing algorithm |
 | DETAILS | null | boolean | No | prints an itemized list of each vulnerability found by the scanner |
 | INCLUDE_PACKAGE_FILES | null | boolean | No | List all packages in the image. |
