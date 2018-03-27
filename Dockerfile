@@ -7,12 +7,9 @@ COPY packages/twistcli /usr/local/bin/twistcli
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache \
-        ca-certificates \
         docker \
         git \
-        nodejs \
-        openssl && \
-    update-ca-certificates && \
+        nodejs && \
     pip install requests && \
     npm install codefresh -g && \
     chmod +x /usr/local/bin/twistcli
