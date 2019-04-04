@@ -47,7 +47,8 @@ envs:
   type:	optional
   description: true|false - reports just the vulnerabilites that have fixes available
 - name: COMPLIANCE_THRESHOLD
-  [ low, medium, high ] sets the the minimal severity compliance issue that returns a fail exit code
+  type:	optional
+  description: "[ low, medium, high ] sets the the minimal severity compliance issue that returns a fail exit code"
 - name: VULNERABILITY_THRESHOLD
   type:	optional
-  description: [ low, medium, high, critical ] sets the minimal severity vulnerability that returns a fail exit code
+  description: "[ low, medium, high, critical ] sets the minimal severity vulnerability that returns a fail exit code"
