@@ -16,19 +16,38 @@ maintainers:
   email: rondevops@gmail.com
 icon: https://raw.githubusercontent.com/codefresh-plugins/cf-twistlock/master/icon.jpg
 envs:
-- name: CF_METADATA
+- name: CODEFRESH_CLI_KEY
   type: required
-  description: Boolean; combination with TL_UPLOAD stores Twistlock Report URL in
-    TL_REPORT_URL var for Codefresh metadata annotation
-CODEFRESH_CLI_KEY	null	string	Yes	https://g.codefresh.io/account/tokens
-CONSOLE_HOSTNAME	null	string	Yes	hostname/ip
-CONSOLE_PORT	null	string	Yes	port
-CONSOLE_USERNAME	null	string	Yes	username
-CONSOLE_PASSWORD	null	string	Yes	password
-TLSCACERT	null	string	No	CA Cert if provided TLS will be used
-HASH	[ sha1 ]	string	No	[ md5, sha1, sha256 ] hashing algorithm
-DETAILS	null	boolean	No	prints an itemized list of each vulnerability found by the scanner
-INCLUDE_PACKAGE_FILES	null	boolean	No	List all packages in the image.
-ONLY_FIXED	null	boolean	No	reports just the vulnerabilites that have fixes available
-COMPLIANCE_THRESHOLD	null	string	No	[ low, medium, high ] sets the the minimal severity compliance issue that returns a fail exit code
-VULNERABILITY_THRESHOLD	null	string	No	[ low, medium, high, critical ] sets the minimal severity vulnerability that returns a fail exit code
+  description: https://g.codefresh.io/account/tokens
+- name: CONSOLE_HOSTNAME
+  type:	required
+  description: Twistlock hostname/ip
+- name: CONSOLE_PORT
+  type:	required
+  description: port
+- name: CONSOLE_USERNAME
+  type:	required
+  description: username
+- name: CONSOLE_PASSWORD
+  type:	required
+  description: password
+- name: TLSCACERT
+  type:	optional
+  description: CA Cert if provided TLS will be used
+- name: HASH
+  type:	optional
+  description: "hashing algorithm (one of: md5, sha1, sha256)" 
+- name: DETAILS
+  type:	optional
+  description: true|false - prints an itemized list of each vulnerability found by the scanner
+- name: INCLUDE_PACKAGE_FILES
+  type:	optional
+  description: true|false - List all packages in the image.
+- name: ONLY_FIXED
+  type:	optional
+  description: true|false - reports just the vulnerabilites that have fixes available
+- name: COMPLIANCE_THRESHOLD
+  [ low, medium, high ] sets the the minimal severity compliance issue that returns a fail exit code
+- name: VULNERABILITY_THRESHOLD
+  type:	optional
+  description: [ low, medium, high, critical ] sets the minimal severity vulnerability that returns a fail exit code
