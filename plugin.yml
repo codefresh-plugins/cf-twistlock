@@ -4,7 +4,7 @@ tag: "19.03"
 version: "19.03"
 description: Execute Twistlock CLI image scan as build step
 categories:
-- Security
+- security
 keywords:
 - Twistlock
 sources:
